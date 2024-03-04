@@ -10,9 +10,12 @@ import SwiftUI
 
 @main
 struct NominationsApp: App {
+    
+    let appDependencyContainer = AppDependencyContainer()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            appDependencyContainer.nominationsDependencyContainer.homeView
         }
     }
 }
