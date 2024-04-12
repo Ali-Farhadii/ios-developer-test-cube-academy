@@ -103,10 +103,10 @@ struct NominationFormView: View {
                     if let fairFace = selectedFair,
                        !cubesName.nomineeId.isEmpty, !reasoning.isEmpty {
                         Task {
-                            async let nomination = viewModel.createNewNomination(nomineeName: cubesName.nomineeId,
-                                                                                 reasoning: reasoning,
-                                                                                 fairFace: fairFace)
-                            await navController.navigate(with: nomination)
+                            async let _ = viewModel.createNewNomination(nomineeName: cubesName.nomineeId,
+                                                                        reasoning: reasoning,
+                                                                        fairFace: fairFace)
+                            navController.navigate(to: NominationsModuleDestinations.submitted)
                         }
                     }
                 }
@@ -115,11 +115,6 @@ struct NominationFormView: View {
             .padding()
             .background(Color.white)
         }
-        .navigationDestination(for: CreateNominationModel?.self, destination: { _ in
-            NominationSubmitted()
-                .navigationBarBackButtonHidden()
-                .environmentObject(navController)
-        })
         .sheet(isPresented: $isPresentExitView, content: {
             ExitView {
                 navController.popToRootView()

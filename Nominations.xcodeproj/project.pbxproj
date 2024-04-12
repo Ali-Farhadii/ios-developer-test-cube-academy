@@ -221,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				1BA8D9B82AE290D7008FBB3F /* NominationsApp.swift */,
+				22FD407A2B91C2DD00059E0C /* NavigationController.swift */,
 				22076F8B2B85CDC3006D1BD4 /* AppDependencyContainer.swift */,
 			);
 			path = Application;
@@ -268,7 +269,6 @@
 			isa = PBXGroup;
 			children = (
 				22076F8F2B85CE1C006D1BD4 /* NominationsDependencyContainer.swift */,
-				22FD407A2B91C2DD00059E0C /* NavigationController.swift */,
 			);
 			path = Container;
 			sourceTree = "<group>";

@@ -14,14 +14,12 @@ class HomeViewModel: ObservableObject {
     
     @Published var isLoading = false
     @Published var nominations: [NominationPresentationModel] = [NominationPresentationModel]()
-    @Published var navController: NavigationController
     
     var nominees: [NomineeBusinessModel] = []
     private let repository: NominationsRepositoryProtocol
     
-    init(repository: NominationsRepositoryProtocol, navController: NavigationController) {
+    init(repository: NominationsRepositoryProtocol) {
         self.repository = repository
-        self.navController = navController
     }
     
     func fetchNominations() async {

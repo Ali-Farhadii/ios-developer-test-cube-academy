@@ -9,23 +9,43 @@
 import Foundation
 import SwiftUI
 
+enum NominationsModuleDestinations: Hashable {
+    case home
+    case form(nominees: [NomineeBusinessModel])
+    case submitted
+}
+
 struct NominationsDependencyContainer {
     
     @MainActor
+    var rootView: some View {
+        homeView
+            .navigationDestination(for: NominationsModuleDestinations.self) { destination in
+                switch destination {
+                case .home:
+                    homeView
+                case .form(let nominees):
+                    nominationFormView(nominees: nominees)
+                case .submitted:
+                    submittedView
+                }
+        }
+    }
+    
+    @MainActor
     var homeView: some View {
-        HomeView(viewModel: homeViewModel,
-                 nominationFormViewFactory: nominationFormView)
+        HomeView(viewModel: homeViewModel)
     }
     
     @MainActor
     private var homeViewModel: HomeViewModel {
-        HomeViewModel(repository: nominationsRepository,
-                      navController: NavigationController())
+        HomeViewModel(repository: nominationsRepository)
     }
     
     @MainActor
-    func nominationFormView(nominees: [NomineeBusinessModel]) -> NominationFormView {
+    func nominationFormView(nominees: [NomineeBusinessModel]) -> some View {
         NominationFormView(viewModel: nominationFormViewModel(nominees: nominees))
+            .navigationBarBackButtonHidden()
     }
     
     @MainActor
@@ -40,5 +60,11 @@ struct NominationsDependencyContainer {
     
     private var remoteDataSource: NominationsRemoteDataSource {
         NominationsURLSessionDataSource(networkService: URLSessionService())
+    }
+    
+    @MainActor
+    var submittedView: some View {
+        NominationSubmitted()
+            .navigationBarBackButtonHidden()
     }
 }

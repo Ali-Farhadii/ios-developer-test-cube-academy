@@ -11,11 +11,15 @@ import SwiftUI
 @main
 struct NominationsApp: App {
     
+    @StateObject var navController = NavigationController()
     let appDependencyContainer = AppDependencyContainer()
     
     var body: some Scene {
         WindowGroup {
-            appDependencyContainer.nominationsDependencyContainer.homeView
+            NavigationStack(path: $navController.path) {            
+                appDependencyContainer.nominationsDependencyContainer.rootView
+            }
+            .environmentObject(navController)
         }
     }
 }

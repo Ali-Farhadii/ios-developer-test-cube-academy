@@ -13,8 +13,8 @@ class NavigationController: ObservableObject {
     
     @Published var path = NavigationPath()
     
-    func navigate(with value: any Hashable) {
-        path.append(value)
+    func navigate(to destination: any Hashable) {
+        path.append(destination)
     }
     
     func pop() {

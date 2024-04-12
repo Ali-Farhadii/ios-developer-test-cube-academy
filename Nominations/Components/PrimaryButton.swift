@@ -51,6 +51,7 @@ struct PrimaryButton: View {
             }
         }
         .buttonStyle(PrimaryButtonStyle())
+        .disabled(isLoading)
     }
 }
 
